@@ -26,12 +26,17 @@ detail_font = pygame.font.SysFont("meiryo", 28)
 def draw_hp_bar(surface, x, y, width, height, current_hp, max_hp):
     if current_hp < 0:
         current_hp = 0
+    # HPの割合を計算 (0.0 ~ 1.0)
     ratio = current_hp / max_hp
+    
+    # HPバーの外枠（背景）と、内側のバーのRectを定義
     background_rect = pygame.Rect(x, y, width, height)
-    hp_rect = pygame.Rect(x, y, width * ratio, height)
-    pygame.draw.rect(surface, (50, 50, 50), background_rect)
-    pygame.draw.rect(surface, (0, 200, 0), hp_rect)
-    pygame.draw.rect(surface, BORDER_COLOR, background_rect, 2)
+    hp_rect = pygame.Rect(x, y, width * ratio, height) # 現在のHPの割合だけ幅を狭める
+    
+    # 描画
+    pygame.draw.rect(surface, (50, 50, 50), background_rect) # 背景を濃いグレーで
+    pygame.draw.rect(surface, (0, 200, 0), hp_rect)       # HPを緑色で
+    pygame.draw.rect(surface, BORDER_COLOR, background_rect, 2) # 枠線
 
 # 冒険者のデータ
 adventurers = [
